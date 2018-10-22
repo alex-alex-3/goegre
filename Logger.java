@@ -19,28 +19,21 @@ public class Logging
   static public void setup(Level level)
   {
     // Create Logger
-    Logger logger = Logger.getLogger("");
-    for (Handler h : logger.getHandlers())
-    {
-      logger.removeHandler(h);      
-    }
+    Logger.getLogger("").stream()
+      .forEach(l -> logger.removeHandler(l));
+    
     logger.setLevel(level);
-    ConsoleHandler consoleHandler = new ConsoleHandler()
-    {
-      protected synchronized void setOutputStream(OutputStream out) throws SecurityException
-      {
-        super.setOutputStream(System.out);
-      }
-    };
+    
+    ConsoleHandler consoleHandler = new ConsoleHandler((super) => super.setOutputStream(System.out))
+    
     logger.addHandler(consoleHandler);
-    consoleHandler.setFormatter(new Formatter()
-    {
-      public String format(LogRecord record)
+    consoleHandler.setFormatter((record) =>
       {
         String sourceClassName = record.getSourceClassName();
         return sourceClassName.substring(sourceClassName.lastIndexOf('.') + 1) + "." + record.getSourceMethodName() + ": " + record.getMessage() + "\n";
       }
-    });
+    )
+      
     consoleHandler.setLevel(Level.ALL);
   }
 }
