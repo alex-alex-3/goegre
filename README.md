@@ -1,7 +1,5 @@
-# Goegre
+# Goegre <img src="https://img.shields.io/badge/version-0.14-blue.svg">
 Static analyzer for functional languages
-
-[](https://img.shields.io/badge/version-0.14-blue.svg)
 
 ---
 
