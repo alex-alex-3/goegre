@@ -1,4 +1,4 @@
-package streme.lang;
+package com.goegre;
 
 import java.io.OutputStream;
 import java.util.logging.ConsoleHandler;
